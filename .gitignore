@@ -1,0 +1,47 @@
+# Xcode build artifacts
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+
+# Xcode schemes (keep shared ones, ignore personal)
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+
+# CocoaPods (not used here but good habit)
+Pods/
+Podfile.lock
+
+# Signing — don't commit personal provisioning profiles
+*.mobileprovision
+*.p12
+*.cer
+
+# macOS noise
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Fastlane (if you ever add it)
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output

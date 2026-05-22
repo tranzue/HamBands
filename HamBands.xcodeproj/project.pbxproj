@@ -6,14 +6,110 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E43124B32FBF7A100050D6C7 /* HamBands Watch App Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E43124A92FBF7A0F0050D6C7 /* HamBands Watch App Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E43124C72FBF7E200050D6C7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43124C62FBF7E200050D6C7 /* WidgetKit.framework */; };
+		E43124C92FBF7E200050D6C7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43124C82FBF7E200050D6C7 /* SwiftUI.framework */; };
+		E43124D62FBF7E220050D6C7 /* HamBands WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E43124C42FBF7E200050D6C7 /* HamBands WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E43124F92FC0895C0050D6C7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E43124F82FC089530050D6C7 /* .gitignore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E43124B12FBF7A100050D6C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E431248F2FBF79C90050D6C7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E43124A82FBF7A0F0050D6C7;
+			remoteInfo = "HamBands Watch App Watch App";
+		};
+		E43124D42FBF7E220050D6C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E431248F2FBF79C90050D6C7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E43124C32FBF7E200050D6C7;
+			remoteInfo = "HamBands WidgetExtension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E43124B72FBF7A100050D6C7 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				E43124B32FBF7A100050D6C7 /* HamBands Watch App Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E43124DB2FBF7E220050D6C7 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E43124D62FBF7E220050D6C7 /* HamBands WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		E43124972FBF79C90050D6C7 /* HamBands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HamBands.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43124A92FBF7A0F0050D6C7 /* HamBands Watch App Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HamBands Watch App Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43124C42FBF7E200050D6C7 /* HamBands WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "HamBands WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43124C62FBF7E200050D6C7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		E43124C82FBF7E200050D6C7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		E43124F82FC089530050D6C7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E43124BF2FBF7BFF0050D6C7 /* Exceptions for "HamBands" folder in "HamBands Watch App Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BandConditions.swift,
+			);
+			target = E43124A82FBF7A0F0050D6C7 /* HamBands Watch App Watch App */;
+		};
+		E43124DA2FBF7E220050D6C7 /* Exceptions for "HamBands Widget" folder in "HamBands WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E43124C32FBF7E200050D6C7 /* HamBands WidgetExtension */;
+		};
+		E43124DD2FBF7E4B0050D6C7 /* Exceptions for "HamBands" folder in "HamBands WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BandConditions.swift,
+			);
+			target = E43124C32FBF7E200050D6C7 /* HamBands WidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E43124992FBF79C90050D6C7 /* HamBands */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E43124BF2FBF7BFF0050D6C7 /* Exceptions for "HamBands" folder in "HamBands Watch App Watch App" target */,
+				E43124DD2FBF7E4B0050D6C7 /* Exceptions for "HamBands" folder in "HamBands WidgetExtension" target */,
+			);
 			path = HamBands;
+			sourceTree = "<group>";
+		};
+		E43124AA2FBF7A0F0050D6C7 /* HamBands Watch App Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "HamBands Watch App Watch App";
+			sourceTree = "<group>";
+		};
+		E43124CA2FBF7E200050D6C7 /* HamBands Widget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E43124DA2FBF7E220050D6C7 /* Exceptions for "HamBands Widget" folder in "HamBands WidgetExtension" target */,
+			);
+			path = "HamBands Widget";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +122,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E43124A62FBF7A0F0050D6C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E43124C12FBF7E200050D6C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E43124C92FBF7E200050D6C7 /* SwiftUI.framework in Frameworks */,
+				E43124C72FBF7E200050D6C7 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		E431248E2FBF79C90050D6C7 = {
 			isa = PBXGroup;
 			children = (
+				E43124F82FC089530050D6C7 /* .gitignore */,
 				E43124992FBF79C90050D6C7 /* HamBands */,
+				E43124AA2FBF7A0F0050D6C7 /* HamBands Watch App Watch App */,
+				E43124CA2FBF7E200050D6C7 /* HamBands Widget */,
+				E43124C52FBF7E200050D6C7 /* Frameworks */,
 				E43124982FBF79C90050D6C7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +157,19 @@
 			isa = PBXGroup;
 			children = (
 				E43124972FBF79C90050D6C7 /* HamBands.app */,
+				E43124A92FBF7A0F0050D6C7 /* HamBands Watch App Watch App.app */,
+				E43124C42FBF7E200050D6C7 /* HamBands WidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E43124C52FBF7E200050D6C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E43124C62FBF7E200050D6C7 /* WidgetKit.framework */,
+				E43124C82FBF7E200050D6C7 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,10 +182,12 @@
 				E43124932FBF79C90050D6C7 /* Sources */,
 				E43124942FBF79C90050D6C7 /* Frameworks */,
 				E43124952FBF79C90050D6C7 /* Resources */,
+				E43124B72FBF7A100050D6C7 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E43124B22FBF7A100050D6C7 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				E43124992FBF79C90050D6C7 /* HamBands */,
@@ -69,6 +198,52 @@
 			productName = HamBands;
 			productReference = E43124972FBF79C90050D6C7 /* HamBands.app */;
 			productType = "com.apple.product-type.application";
+		};
+		E43124A82FBF7A0F0050D6C7 /* HamBands Watch App Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E43124B42FBF7A100050D6C7 /* Build configuration list for PBXNativeTarget "HamBands Watch App Watch App" */;
+			buildPhases = (
+				E43124A52FBF7A0F0050D6C7 /* Sources */,
+				E43124A62FBF7A0F0050D6C7 /* Frameworks */,
+				E43124A72FBF7A0F0050D6C7 /* Resources */,
+				E43124DB2FBF7E220050D6C7 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E43124D52FBF7E220050D6C7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				E43124AA2FBF7A0F0050D6C7 /* HamBands Watch App Watch App */,
+			);
+			name = "HamBands Watch App Watch App";
+			packageProductDependencies = (
+			);
+			productName = "HamBands Watch App Watch App";
+			productReference = E43124A92FBF7A0F0050D6C7 /* HamBands Watch App Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E43124C32FBF7E200050D6C7 /* HamBands WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E43124D72FBF7E220050D6C7 /* Build configuration list for PBXNativeTarget "HamBands WidgetExtension" */;
+			buildPhases = (
+				E43124C02FBF7E200050D6C7 /* Sources */,
+				E43124C12FBF7E200050D6C7 /* Frameworks */,
+				E43124C22FBF7E200050D6C7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E43124CA2FBF7E200050D6C7 /* HamBands Widget */,
+			);
+			name = "HamBands WidgetExtension";
+			packageProductDependencies = (
+			);
+			productName = "HamBands WidgetExtension";
+			productReference = E43124C42FBF7E200050D6C7 /* HamBands WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +256,12 @@
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
 					E43124962FBF79C90050D6C7 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					E43124A82FBF7A0F0050D6C7 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					E43124C32FBF7E200050D6C7 = {
 						CreatedOnToolsVersion = 26.5;
 					};
 				};
@@ -100,12 +281,29 @@
 			projectRoot = "";
 			targets = (
 				E43124962FBF79C90050D6C7 /* HamBands */,
+				E43124A82FBF7A0F0050D6C7 /* HamBands Watch App Watch App */,
+				E43124C32FBF7E200050D6C7 /* HamBands WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E43124952FBF79C90050D6C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E43124F92FC0895C0050D6C7 /* .gitignore in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E43124A72FBF7A0F0050D6C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E43124C22FBF7E200050D6C7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +320,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E43124A52FBF7A0F0050D6C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E43124C02FBF7E200050D6C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E43124B22FBF7A100050D6C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E43124A82FBF7A0F0050D6C7 /* HamBands Watch App Watch App */;
+			targetProxy = E43124B12FBF7A100050D6C7 /* PBXContainerItemProxy */;
+		};
+		E43124D52FBF7E220050D6C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E43124C32FBF7E200050D6C7 /* HamBands WidgetExtension */;
+			targetProxy = E43124D42FBF7E220050D6C7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E43124A02FBF79CA0050D6C7 /* Debug */ = {
@@ -261,6 +486,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -293,6 +519,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,6 +534,138 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E43124B52FBF7A100050D6C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5R8BSBLJ8N;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "HamBands Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.kd3clw.HamBands;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kd3clw.HamBands.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		E43124B62FBF7A100050D6C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5R8BSBLJ8N;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "HamBands Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.kd3clw.HamBands;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kd3clw.HamBands.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		E43124D82FBF7E220050D6C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5R8BSBLJ8N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HamBands Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "HamBands Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kd3clw.HamBands.watchkitapp.HamBands-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		E43124D92FBF7E220050D6C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5R8BSBLJ8N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HamBands Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "HamBands Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kd3clw.HamBands.watchkitapp.HamBands-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};
@@ -327,6 +686,24 @@
 			buildConfigurations = (
 				E43124A32FBF79CA0050D6C7 /* Debug */,
 				E43124A42FBF79CA0050D6C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E43124B42FBF7A100050D6C7 /* Build configuration list for PBXNativeTarget "HamBands Watch App Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E43124B52FBF7A100050D6C7 /* Debug */,
+				E43124B62FBF7A100050D6C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E43124D72FBF7E220050D6C7 /* Build configuration list for PBXNativeTarget "HamBands WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E43124D82FBF7E220050D6C7 /* Debug */,
+				E43124D92FBF7E220050D6C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
