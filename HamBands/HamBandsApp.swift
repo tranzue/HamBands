@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct HamBandsApp: App {
+struct HamBandApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
