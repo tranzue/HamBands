@@ -113,9 +113,15 @@ class BandViewModel: ObservableObject {
         guard let url = URL(string: "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json") else { return 2.0 }
         do {
             let (data, _) = try await session.data(from: url)
-            if let json = try JSONSerialization.jsonObject(with: data) as? [[Any]], json.count > 1 {
-                let latest = json[json.count - 1]
-                return Double(latest[1] as? String ?? "2.0") ?? 2.0
+            guard let json = try JSONSerialization.jsonObject(with: data) as? [[Any]], json.count > 1 else { return 2.0 }
+            // First row is a header; sort remaining rows by time_tag (col 0) and take the latest with a valid Kp (col 1).
+            let rows = json.dropFirst().sorted { (a, b) in
+                let aT = (a.first as? String) ?? ""
+                let bT = (b.first as? String) ?? ""
+                return aT < bT
+            }
+            for row in rows.reversed() where row.count > 1 {
+                if let kp = doubleValue(row[1]) { return kp }
             }
         } catch { }
         return 2.0
@@ -127,13 +133,26 @@ class BandViewModel: ObservableObject {
         do {
             let (data, _) = try await session.data(from: url)
             struct F107Entry: Codable {
+                let time_tag: String?
                 let flux: Double?
-                enum CodingKeys: String, CodingKey { case flux = "flux" }
             }
             let entries = try JSONDecoder().decode([F107Entry].self, from: data)
-            return entries.last?.flux ?? 120.0
+            // Skip null-flux entries (future / not-yet-observed days) and pick the most recent by time_tag.
+            let valid = entries.compactMap { e -> (String, Double)? in
+                guard let t = e.time_tag, let f = e.flux else { return nil }
+                return (t, f)
+            }.sorted { $0.0 < $1.0 }
+            return valid.last?.1 ?? 120.0
         } catch { }
         return 120.0
+    }
+
+    private func doubleValue(_ raw: Any) -> Double? {
+        if let s = raw as? String { return Double(s) }
+        if let d = raw as? Double { return d }
+        if let i = raw as? Int { return Double(i) }
+        if let n = raw as? NSNumber { return n.doubleValue }
+        return nil
     }
 
     var bestBand: BandCondition? {
