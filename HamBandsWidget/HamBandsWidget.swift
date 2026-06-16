@@ -1,5 +1,6 @@
 import WidgetKit
 import SwiftUI
+import AppIntents
 
 // MARK: - Shared Timeline Entry
 
@@ -60,13 +61,15 @@ struct BandProvider: TimelineProvider {
     private func fetchEntry() async -> BandEntry {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
         let session = URLSession(configuration: config)
 
-        async let k = fetchK(session: session)
+        async let kAndA = fetchKAndA(session: session)
         async let sfi = fetchSFI(session: session)
-        async let a = fetchA(session: session)
 
-        let (kVal, sfiVal, aVal) = await (k, sfi, a)
+        let (kVal, aVal) = await kAndA
+        let sfiVal = await sfi
         return BandEntry(
             date: Date(),
             sfi: sfiVal,
@@ -76,27 +79,33 @@ struct BandProvider: TimelineProvider {
         )
     }
 
-    private func fetchK(session: URLSession) async -> Double {
+    // K and A both come from the planetary-k-index endpoint (a_running is the daily A-index).
+    private func fetchKAndA(session: URLSession) async -> (k: Double, a: Double) {
         guard let url = URL(string: "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json"),
-              let (data, _) = try? await session.data(from: url),
-              let json = try? JSONSerialization.jsonObject(with: data) as? [[Any]],
-              let latest = json.last else { return 2.0 }
-        return Double(latest[1] as? String ?? "2.0") ?? 2.0
+              let (data, _) = try? await session.data(from: url) else { return (2.0, 8) }
+        struct KEntry: Decodable {
+            let time_tag: String
+            let Kp: Double
+            let a_running: Double?
+        }
+        guard let entries = try? JSONDecoder().decode([KEntry].self, from: data) else { return (2.0, 8) }
+        let latest = entries.sorted { $0.time_tag < $1.time_tag }.last
+        return (latest?.Kp ?? 2.0, latest?.a_running ?? 8)
     }
 
     private func fetchSFI(session: URLSession) async -> Double {
         guard let url = URL(string: "https://services.swpc.noaa.gov/json/f107_cm_flux.json"),
               let (data, _) = try? await session.data(from: url) else { return 120.0 }
-        struct F107Entry: Codable { let flux: Double? }
-        return (try? JSONDecoder().decode([F107Entry].self, from: data))?.last?.flux ?? 120.0
-    }
-
-    private func fetchA(session: URLSession) async -> Double {
-        guard let url = URL(string: "https://services.swpc.noaa.gov/json/solar-cycle/observed-solar-indices.json"),
-              let (data, _) = try? await session.data(from: url),
-              let json = try? JSONSerialization.jsonObject(with: data) as? [[Any]],
-              let last = json.last, last.count >= 6 else { return 8 }
-        return (last[5] as? Double) ?? (last[5] as? Int).map(Double.init) ?? 8
+        struct F107Entry: Decodable {
+            let time_tag: String?
+            let flux: Double?
+        }
+        guard let entries = try? JSONDecoder().decode([F107Entry].self, from: data) else { return 120.0 }
+        let valid = entries.compactMap { e -> (String, Double)? in
+            guard let t = e.time_tag, let f = e.flux else { return nil }
+            return (t, f)
+        }.sorted { $0.0 < $1.0 }
+        return valid.last?.1 ?? 120.0
     }
 }
 
@@ -115,15 +124,17 @@ private func sfiLabel(_ sfi: Double) -> String {
 }
 
 private func kColor(_ k: Double) -> Color {
-    if k <= 2 { return .green }
-    if k <= 4 { return .yellow }
+    if k < 3 { return .green }
+    if k < 5 { return .yellow }
+    if k < 7 { return .orange }
     return .red
 }
 
 private func kLabel(_ k: Double) -> String {
-    if k <= 2 { return "Quiet" }
-    if k <= 4 { return "Unsettled" }
-    return "Stormy"
+    if k < 3 { return "Quiet" }
+    if k < 5 { return "Unsettled" }
+    if k < 7 { return "Storm" }
+    return "Severe"
 }
 
 private func aColor(_ a: Double) -> Color {
@@ -247,6 +258,7 @@ struct BandsLargeView: View {
                 Text(entry.date, style: .time)
                     .font(.system(size: 11, design: .monospaced))
                     .foregroundStyle(.secondary)
+                RefreshButton()
             }
 
             Spacer(minLength: 8)
@@ -342,6 +354,7 @@ struct SolarMediumView: View {
                 Text(entry.date, style: .time)
                     .font(.system(size: 10, design: .monospaced))
                     .foregroundStyle(.secondary)
+                RefreshButton()
             }
 
             HStack(spacing: 8) {
@@ -372,6 +385,7 @@ struct SolarLargeView: View {
                 Text(entry.date, style: .time)
                     .font(.system(size: 11, design: .monospaced))
                     .foregroundStyle(.secondary)
+                RefreshButton()
             }
 
             Spacer(minLength: 12)
@@ -413,6 +427,20 @@ struct SolarLargeView: View {
         if a <= 7 { return "Calm daily average." }
         if a <= 29 { return "Active daily average." }
         return "Storm-level daily activity."
+    }
+}
+
+// MARK: - Refresh button
+
+struct RefreshButton: View {
+    var body: some View {
+        Button(intent: RefreshHamBandsIntent()) {
+            Image(systemName: "arrow.clockwise")
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(.secondary)
+                .padding(4)
+        }
+        .buttonStyle(.plain)
     }
 }
 

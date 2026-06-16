@@ -32,6 +32,8 @@ class TrendViewModel: ObservableObject {
 
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 15
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
         let session = URLSession(configuration: config)
 
         async let kTask = fetchKIndexHistory(session: session)

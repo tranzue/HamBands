@@ -1,6 +1,9 @@
 import Foundation
 import SwiftUI
 import Combine
+#if canImport(WidgetKit)
+import WidgetKit
+#endif
 
 // MARK: - Data Models
 
@@ -85,10 +88,12 @@ class BandViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
 
-        // Use a 10 second timeout
+        // Use a 10 second timeout and bypass URL cache so we always see fresh NOAA data
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10
         config.timeoutIntervalForResource = 10
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
         let session = URLSession(configuration: config)
 
         // Fetch K-index and SFI in parallel
@@ -107,22 +112,22 @@ class BandViewModel: ObservableObject {
         self.solarData = solar
         self.bands = rateBands(sfi: sfi, kIndex: kIndex)
         isLoading = false
+
+        #if canImport(WidgetKit)
+        WidgetCenter.shared.reloadAllTimelines()
+        #endif
     }
 
     private func fetchKIndex(session: URLSession) async -> Double {
         guard let url = URL(string: "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json") else { return 2.0 }
         do {
             let (data, _) = try await session.data(from: url)
-            guard let json = try JSONSerialization.jsonObject(with: data) as? [[Any]], json.count > 1 else { return 2.0 }
-            // First row is a header; sort remaining rows by time_tag (col 0) and take the latest with a valid Kp (col 1).
-            let rows = json.dropFirst().sorted { (a, b) in
-                let aT = (a.first as? String) ?? ""
-                let bT = (b.first as? String) ?? ""
-                return aT < bT
+            struct KEntry: Decodable {
+                let time_tag: String
+                let Kp: Double
             }
-            for row in rows.reversed() where row.count > 1 {
-                if let kp = doubleValue(row[1]) { return kp }
-            }
+            let entries = try JSONDecoder().decode([KEntry].self, from: data)
+            return entries.sorted { $0.time_tag < $1.time_tag }.last?.Kp ?? 2.0
         } catch { }
         return 2.0
     }
@@ -145,14 +150,6 @@ class BandViewModel: ObservableObject {
             return valid.last?.1 ?? 120.0
         } catch { }
         return 120.0
-    }
-
-    private func doubleValue(_ raw: Any) -> Double? {
-        if let s = raw as? String { return Double(s) }
-        if let d = raw as? Double { return d }
-        if let i = raw as? Int { return Double(i) }
-        if let n = raw as? NSNumber { return n.doubleValue }
-        return nil
     }
 
     var bestBand: BandCondition? {

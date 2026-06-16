@@ -12,6 +12,16 @@ struct ContentView: View {
                 .tabItem {
                     Label("Trend", systemImage: "chart.line.uptrend.xyaxis")
                 }
+
+            GreylineView()
+                .tabItem {
+                    Label("Greyline", systemImage: "globe")
+                }
+
+            AboutView()
+                .tabItem {
+                    Label("About", systemImage: "info.circle")
+                }
         }
     }
 }
@@ -180,7 +190,7 @@ struct SolarHeaderView: View {
                 StatTile(
                     label: "K-Index",
                     value: String(format: "%.1f", solar.kIndex),
-                    color: solar.kIndex <= 2 ? .green : solar.kIndex <= 4 ? .yellow : .red
+                    color: solar.kIndex < 3 ? .green : solar.kIndex < 5 ? .yellow : solar.kIndex < 7 ? .orange : .red
                 )
             }
             .buttonStyle(.plain)
