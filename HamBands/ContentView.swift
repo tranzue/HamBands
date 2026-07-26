@@ -172,7 +172,7 @@ struct SolarHeaderView: View {
                 StatTile(
                     label: "SFI",
                     value: String(format: "%.0f", solar.solarFluxIndex),
-                    color: solar.solarFluxIndex >= 150 ? .green : solar.solarFluxIndex >= 120 ? .yellow : .red
+                    color: solar.solarFluxIndex >= 150 ? .green : solar.solarFluxIndex >= 100 ? .yellow : .red
                 )
             }
             .buttonStyle(.plain)
