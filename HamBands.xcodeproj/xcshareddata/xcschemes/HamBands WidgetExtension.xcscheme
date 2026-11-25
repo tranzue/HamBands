@@ -78,6 +78,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E43124C32FBF7E200050D6C7"
             BuildableName = "HamBands WidgetExtension.appex"
+            BlueprintName = "HamBands WidgetExtension"
             ReferencedContainer = "container:HamBands.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -120,6 +121,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E43124C32FBF7E200050D6C7"
             BuildableName = "HamBands WidgetExtension.appex"
+            BlueprintName = "HamBands WidgetExtension"
             ReferencedContainer = "container:HamBands.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
