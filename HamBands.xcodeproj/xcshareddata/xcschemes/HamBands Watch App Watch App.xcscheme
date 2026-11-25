@@ -61,7 +61,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E43124A82FBF7A0F0050D6C7"
             BuildableName = "HamBands Watch App Watch App.app"
-            BlueprintName = "HamBands Watch App Watch App"
             ReferencedContainer = "container:HamBands.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -78,7 +77,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E43124A82FBF7A0F0050D6C7"
             BuildableName = "HamBands Watch App Watch App.app"
-            BlueprintName = "HamBands Watch App Watch App"
             ReferencedContainer = "container:HamBands.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
