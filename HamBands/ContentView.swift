@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 
 struct ContentView: View {
     var body: some View {
@@ -23,6 +24,7 @@ struct ContentView: View {
                     Label("About", systemImage: "info.circle")
                 }
         }
+        .themedRoot()
     }
 }
 
@@ -34,6 +36,20 @@ struct BandConditionsTab: View {
     @State private var showEasterEgg = false
     @State private var showPerfectConditions = false
     @State private var titleTapTimer: Timer? = nil
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.requestReview) private var requestReview
+    @AppStorage(AppTheme.storageKey) private var theme: AppTheme = .modern
+    // Rate-the-app bookkeeping: how many times data has loaded successfully,
+    // and which app version we last asked about (so we ask at most once per version).
+    @AppStorage("successfulLoadCount") private var successfulLoadCount = 0
+    @AppStorage("lastReviewRequestVersion") private var lastReviewRequestVersion = ""
+
+    // Two columns of band rows when the screen is wide (iPhone Duo open, iPad),
+    // one column on a regular iPhone or the Duo's closed outer screen.
+    private var bandColumns: [GridItem] {
+        let count = horizontalSizeClass == .regular ? 2 : 1
+        return Array(repeating: GridItem(.flexible(), spacing: 10), count: count)
+    }
 
     var body: some View {
         NavigationStack {
@@ -55,6 +71,9 @@ struct BandConditionsTab: View {
                 } else {
                     ScrollView {
                         VStack(spacing: 16) {
+                            if theme == .retro {
+                                RetroWelcomeBanner()
+                            }
                             if let solar = vm.solarData {
                                 // Perfect K=0 banner
                                 if solar.kIndex == 0 {
@@ -63,7 +82,7 @@ struct BandConditionsTab: View {
                                 SolarHeaderView(solar: solar)
                             }
 
-                            VStack(spacing: 10) {
+                            LazyVGrid(columns: bandColumns, spacing: 10) {
                                 ForEach(vm.bands) { band in
                                     BandRowView(band: band)
                                 }
@@ -80,6 +99,7 @@ struct BandConditionsTab: View {
                     .refreshable { await vm.fetch() }
                 }
             }
+            .themedScreenBackground()
             .navigationTitle("HamBand")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -108,12 +128,36 @@ struct BandConditionsTab: View {
                 }
             }
         }
-        .task { await vm.fetch() }
+        .task {
+            await vm.fetch()
+            await askForReviewIfAppropriate()
+        }
         .alert("73 de KD3CLW", isPresented: $showEasterEgg) {
+            Button(theme == .retro ? "Back to the future" : "Party like it's 1999") {
+                withAnimation { theme = theme == .retro ? .modern : .retro }
+            }
             Button("73!", role: .cancel) {}
         } message: {
             Text("You found the secret frequency.\n\nHamBand was built by Taylor, KD3CLW, from Ford City, PA.\n\nGood DX & clear skies. 73.")
         }
+    }
+
+    /// Shows Apple's "Enjoying HamBand?" rating prompt once someone has used the app
+    /// a few times and data loaded fine — a good moment, not on first launch.
+    /// Apple decides whether the prompt actually appears (at most 3 times a year per
+    /// user); in debug builds it always shows, and in TestFlight it never does.
+    private func askForReviewIfAppropriate() async {
+        guard vm.errorMessage == nil, vm.solarData != nil else { return }
+        successfulLoadCount += 1
+
+        let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        guard successfulLoadCount >= 5, lastReviewRequestVersion != currentVersion else { return }
+
+        // Give the person a moment to see their band conditions first.
+        try? await Task.sleep(for: .seconds(2))
+        guard !Task.isCancelled else { return }
+        lastReviewRequestVersion = currentVersion
+        requestReview()
     }
 }
 
@@ -201,7 +245,7 @@ struct SolarHeaderView: View {
             }
         }
         .padding()
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14))
+        .themedCard(cornerRadius: 14)
         .padding(.horizontal)
     }
 }
@@ -241,6 +285,8 @@ struct BandRowView: View {
                 .frame(width: 12, height: 12)
             Text(band.band)
                 .font(.system(.title3, design: .monospaced, weight: .semibold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
                 .frame(width: 44, alignment: .leading)
             VStack(alignment: .leading, spacing: 2) {
                 Text(band.rating.rawValue)
@@ -253,7 +299,7 @@ struct BandRowView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+        .themedCard(cornerRadius: 12)
     }
 }
 

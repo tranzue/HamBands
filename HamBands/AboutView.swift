@@ -11,7 +11,11 @@ struct AboutView: View {
                     TermsBlock()
                 }
                 .padding()
+                // Keep lines a comfortable reading length on wide screens.
+                .frame(maxWidth: 700)
+                .frame(maxWidth: .infinity)
             }
+            .themedScreenBackground()
             .navigationTitle("About")
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -71,7 +75,7 @@ private struct LinksBlock: View {
                 url: URL(string: "https://github.com/tranzue/HamBands/blob/main/TermsOfUse.md")!
             )
         }
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+        .themedCard(cornerRadius: 12)
     }
 }
 

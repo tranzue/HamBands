@@ -192,6 +192,7 @@ struct TrendView: View {
                     legendSection
                 }
             }
+            .themedScreenBackground()
             .navigationTitle("7-Day Trend")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
