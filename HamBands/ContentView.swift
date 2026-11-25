@@ -14,6 +14,11 @@ struct ContentView: View {
                     Label("Trend", systemImage: "chart.line.uptrend.xyaxis")
                 }
 
+            BandPrivilegesView()
+                .tabItem {
+                    Label("Privileges", systemImage: "ruler")
+                }
+
             GreylineView()
                 .tabItem {
                     Label("Greyline", systemImage: "globe")
